@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex items-center justify-center h-screen" >
+        <form class="text-center" action="/edit/<%= postfind._id %>" method="post">
+            <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Edit Your Post</h1>
+          <textarea 
+            type="edited text" 
+            name="editedpost"
+            class="block w-64 p-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          > <%= postfind.content %>
+         </textarea>
+          <button 
+           type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            Edit Post
+          </button>
+        </form>
+      </div>
+      
+</body>
+</html>

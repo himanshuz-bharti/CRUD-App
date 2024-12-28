@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+        <a class="bg-red-500 rounded-md text-white border border-gray-300 text-sm" href="/logout">Logout</a>
+        <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">User Profile</h1>
+        <div class="space-y-3">
+            <p class="text-gray-600">
+                <span class="font-semibold text-gray-800">Username:</span> <%= user.username %>
+            </p>
+            <p class="text-gray-600">
+                <span class="font-semibold text-gray-800">Email:</span> <%= user.email %>
+            </p>
+            <p class="text-gray-600">
+                <span class="font-semibold text-gray-800">Age:</span> <%= user.age %>
+            </p>
+
+            <form action="/posts" method="post">
+                <textarea type="text" placeholder="post" name="post" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"></textarea>
+                <div class="flex gap-10">
+                    <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-green-600 text-white mb-5 font-semibold rounded-lg shadow-lg hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-300">Create Post</button>
+                    <a class="px-4 py-3 bg-red-400 text-white mb-5 font-semibold rounded-lg shadow-lg" href="/feed">Feed</a>
+                </div>
+            </form>
+            <div class="posts mt-20">
+                <h2 class="text-zinc-400">Your Posts</h2>
+                <div class="postcontainer mt-5">
+
+                    
+                        <% user.posts.reverse().forEach(item =>{ %>
+                            <div class="post w-full p-2 h-full mb-2 rounded-md border-2 border-zinc-700 bg-zinc-300">
+                            <h2 class="text-blue-400 mt-0 p-0 leading-none"><%= user.username %></h2>
+                        <p class="text-sm tracking-tight"><%= item.content %></p>
+                        <a class="mt-4 inline-block"><%= item.likes.length %> likes</a>
+                        <div class="btns flex gap-4 mt-2">
+                            <a class="text-red-500" href="/like/<%= item._id %>">
+                                <%= item.likes.indexOf(user._id)==-1? 'Like' : 'Unlike' %>
+                            </a>
+                            <a class="text-green-500" href="/delete/<%= item._id %>">Delete</a>
+                            <a class="text-blue-500" href="/edit/<%= item._id %>">Edit</a>
+                        </div>
+                        </div>
+                        <%}) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
